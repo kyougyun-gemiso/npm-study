@@ -1,0 +1,32 @@
+services:
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+      - ./config.json:/app/config/production.json
+  nginx1:
+    image: nginx:latest
+    volumes:
+      - ./nginx1.conf:/etc/nginx/nginx.conf
+      - ./nginx1:/usr/share/nginx/html
+    ports:
+      - "8081:80"
+  nginx2:
+    image: nginx:latest
+    volumes:
+      - ./nginx2.conf:/etc/nginx/nginx.conf
+      - ./nginx2:/usr/share/nginx/html
+    ports:
+      - "8082:80"
+  nginx3:
+    image: nginx:latest
+    volumes:
+      - ./nginx3.conf:/etc/nginx/nginx.conf
+      - ./nginx3:/usr/share/nginx/html
+    ports:
+      - "8083:80"
